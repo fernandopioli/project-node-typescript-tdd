@@ -1,18 +1,16 @@
+import { MissingParamError } from '../../errors'
 import { Validation } from './validation'
 
-export class ValidationComposite implements Validation {
-  private readonly validations: Validation[]
+export class RequiredFieldValidation implements Validation {
+  private readonly fieldname: string
 
-  constructor (validations: Validation[]) {
-    this.validations = validations
+  constructor (fieldname: string) {
+    this.fieldname = fieldname
   }
 
   validate (input: any): Error | null {
-    for (const validation of this.validations) {
-      const error = validation.validate(input)
-      if (error) {
-        return error
-      }
+    if (!input[this.fieldname]) {
+      return new MissingParamError(this.fieldname)
     }
     return null
   }
