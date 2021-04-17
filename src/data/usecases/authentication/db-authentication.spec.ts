@@ -139,7 +139,7 @@ describe('DbAuthentication', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('should call TokenGenerator throws', async () => {
+  test('should return access Torken if TokenGenerator success', async () => {
     const { sut } = makeSut()
     const accessToken = await sut.auth(makeFakeAuthentication())
     expect(accessToken).toBe('any_token')
@@ -150,5 +150,12 @@ describe('DbAuthentication', () => {
     const tokenSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'update')
     await sut.auth(makeFakeAuthentication())
     expect(tokenSpy).toHaveBeenCalledWith('any_id', 'any_token')
+  })
+
+  test('should throw if UpdateAccessTokenRepository throws', async () => {
+    const { sut, updateAccessTokenRepositoryStub } = makeSut()
+    jest.spyOn(updateAccessTokenRepositoryStub, 'update').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.auth(makeFakeAuthentication())
+    await expect(promise).rejects.toThrow()
   })
 })
