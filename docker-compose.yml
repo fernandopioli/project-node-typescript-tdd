@@ -1,0 +1,25 @@
+version: "3.7"
+ 
+services:
+  node-ts:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: api_container
+    restart: always
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8080:8080"
+      - "8181:8181"
+    command: npm run dev
+    links: 
+      - mongo
+  mongo:
+    container_name: mongo-container
+    image: mongo:4.4
+    restart: always
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

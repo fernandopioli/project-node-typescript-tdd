@@ -1,0 +1,5 @@
+FROM node:14.16-alpine
+RUN apk add dumb-init
+RUN apk add --no-cache bash
+WORKDIR /usr/src/app
+RUN npm i
