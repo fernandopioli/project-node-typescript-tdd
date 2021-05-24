@@ -1,5 +1,6 @@
 import { AddSurveyModel, AddSurveyRepository } from './db-add-survey-protocols'
 import { DbAddSurvey } from './db-add-survey'
+import Mockdate from 'mockdate'
 
 const makeAddSurveyRepositoryStub = (): AddSurveyRepository => {
   class AddSurveyRepositoryStub implements AddSurveyRepository {
@@ -15,7 +16,8 @@ const makeFakeSurveyData = (): AddSurveyModel => ({
   answers: [{
     image: 'any_image',
     answer: 'any_answer'
-  }]
+  }],
+  date: new Date()
 })
 
 interface SutTypes {
@@ -31,6 +33,14 @@ const makeSut = (): SutTypes => {
     addSurveyRepositoryStub
   }
 }
+
+beforeAll(() => {
+  Mockdate.set(new Date())
+})
+
+afterAll(() => {
+  Mockdate.reset()
+})
 
 describe('DbAddSurvey Usecase', () => {
   test('should call AddSurveyRepository with correct values', async () => {
