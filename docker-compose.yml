@@ -12,6 +12,10 @@ services:
     ports:
       - "8080:8080"
       - "8181:8181"
+    environment: 
+      - MONGO_URL=mongodb://mongo:27017/test-app
+      - PORT=8080
+      - JWT_SECRET=jif7D&MFCM87@$$##.Hbf52F9$$#
     command: npm run dev
     links: 
       - mongo
