@@ -18,6 +18,6 @@ export class DbAuthentication implements Authentication {
         return accessToken
       }
     }
-    return await new Promise(resolve => resolve(null))
+    return await Promise.resolve(null)
   }
 }
