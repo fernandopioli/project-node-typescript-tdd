@@ -4,7 +4,8 @@ import { HttpRequest } from '@/presentation/protocols'
 import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { throwError } from '@/domain/test'
-import { mockAddAccount, mockAuthentication, mockValidation } from '@/presentation/test'
+import { mockAddAccount, mockAuthentication } from '@/presentation/test'
+import { mockValidation } from '@/tests/presentation/mocks'
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {

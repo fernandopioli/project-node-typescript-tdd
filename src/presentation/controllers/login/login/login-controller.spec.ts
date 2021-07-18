@@ -3,7 +3,8 @@ import { HttpRequest, Authentication, Validation } from './login-controller-prot
 import { throwError } from '@/domain/test'
 import { MissingParamError } from '@/presentation/errors'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http/http-helper'
-import { mockAuthentication, mockValidation } from '@/presentation/test'
+import { mockAuthentication } from '@/presentation/test'
+import { mockValidation } from '@/tests/presentation/mocks'
 
 const mockRequest = (): HttpRequest => ({
   body: {
